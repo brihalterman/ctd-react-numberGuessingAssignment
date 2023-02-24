@@ -1,7 +1,9 @@
-import React, { Component } from "react";
+// Import useState
+import React, { useState, Component } from "react";
 import Button from "./Button";
 
-class GuessControl extends Component {
+// Rename the current GuessControl class to GuessControlOld
+class GuessControlOld extends Component {
   constructor(props) {
     super(props);
 
@@ -42,6 +44,34 @@ class GuessControl extends Component {
       </div>
     );
   }
+}
+
+// Create a new function component called "GuessControl" that will take an "onGuess" prop
+const GuessControl = ({onGuess}) => {
+  // Create a new state variable named "currentGuess" with setter "setCurrentGuess" and default value of an empty string
+  const [currentGuess, setCurrentGuess] = useState('');
+  // Create a handleInputChange function within the component that updates the "currentGuess" state value when the user changes the value in the input
+  const handleInputChange = (e) => {
+    setCurrentGuess(e.target.value)
+  }
+  // Create an "onSubmitGuess" function that calls the "onGuess" prop with the currentGuess value converted to a number and also resets the currentGuess to an empty string when it is called
+  const onSubmitGuess = () => {
+    onGuess(Number(currentGuess));
+    setCurrentGuess(``);
+  }
+  // Copy the return value from the render function in the class component to be the return value in the new function component
+  return (
+    // Remove any references to "this"
+    <div>
+      <input
+        type="number"
+        value={currentGuess}
+        onChange={handleInputChange}
+      />
+      {/* Set the onClick property on the button to refer to this function */}
+      <Button onClick={onSubmitGuess}>Submit Guess</Button>
+    </div>
+  );
 }
 
 export default GuessControl;
