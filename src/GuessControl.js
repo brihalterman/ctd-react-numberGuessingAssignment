@@ -1,6 +1,4 @@
-// If you still have the old class version around as "GuessControlOld", delete it.
-
-import React, {useState, Component} from "react";
+import React, {useState} from "react";
 import Button from "./Button";
 
 const GuessControl = ({onGuess}) => {
@@ -10,8 +8,11 @@ const GuessControl = ({onGuess}) => {
   }
   const onSubmitGuess = () => {
     onGuess(Number(currentGuess));
-    setCurrentGuess(``);
+    setCurrentGuess('');
   }
+
+console.log(currentGuess)
+
   return (
     <div>
       <input
